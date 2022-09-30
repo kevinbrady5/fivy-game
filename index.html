@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles.css">
+    <title>Fivey</title>
+</head>
+<body>
+
+    <ul class="navbar">
+        <li class="navTitle">Fivey</li>
+        <li class=help><button id="instructionsModalButton">?</button></li>
+    </ul>
+
+    <div class="footer">
+        <div class="playersScoresDiv">
+            <p class="players">Test - 0</p>
+        </div>
+    </div>
+
+    <div>
+        <div>
+            <button class="startButton">Start Game</button>
+        </div>
+
+        <div class="addPlayerDiv">
+            <button class="addPlayerButton">+</button>
+            <p>Add New Player</p>
+        </div>
+
+        <div class="newPlayerDiv">
+            <p>Enter player name. Click Save</p>
+
+            <input type="text" id="newPlayer">
+            <button class="newPlayerButton">Save Player</button>
+        </div>
+        <div class="finishButtonDiv">
+            <button class="finishButton">Finish</button>
+        </div>
+
+        <div class="numOfTurnsDiv">
+            <p>How many turns per round?</p>
+
+            <button class="turnsButton3">3</button>
+            <button class="turnsButton5">5</button>
+            <button class="turnsButton7">7</button>
+        </div>
+
+        <div class="finishRoundDiv">
+
+        </div>
+
+        <div class="flex-container">
+            <div class="roundGoalDiv">
+                <h1>Round Goal</h1>
+            <p class="roundGoal">Two of a Kind + Three in a Row (Run)</p>
+            </div>
+            <div class="turnDiv">
+                <h1 class="turnCounter">Turn 1 of 3</h1>
+            <p class="turnModifier">Pass 2 to the Left</p>
+            <div class="nextButtonDiv">
+                <button class="nextButton">Next Turn</button>
+            </div>
+            </div>
+        </div>
+
+        <!-- Trigger/Open The Modal
+    <button id="instructionsModalButton">How To Play</button>
+    </div> -->
+
+    <!-- The Modal -->
+<div id="instructionsModal" class="modal">
+
+    <!-- Modal content -->
+    <div class="modal-content">
+        <div class="modal-header">
+        <span class="close">&times;</span>
+        <h2>How To Play</h2>
+        </div>
+        <div class="modal-body">
+        <p>The goal of NewGame is to get rid of all your cards.</p>
+        <ul>
+            <li>NewGame is played in <i>rounds</i></li>
+            <li>Each round has a random <i>round goal</i></li>
+            <li>You get rid of cards by playing them when it is your turn</li>
+            <li>You can play the round goal by laying it down in front of you <i>or</i> you can play additional cards on another player's layed down cards
+            <li>These <i>additional</i> cards must follow the round goal</li>
+            <li>Each round is made up a set number of <i>turns</i></li>
+            <li>Each turn has a random <i>turn modifier</i></li>
+            <li>The turn modifier will give instructions that all players follow before the turn starts <i>or</i> it will specify a modifier that lasts for that turn only</li>
+            <li>After the last turn, the round is finished</li>
+            <li></li>
+        </ul>
+        <p>Here is an example of gameplay:</p>
+        <ol>
+            <li>This first...</li>
+            <li>Then this.</li>
+            <li>Now do this?</li>
+            <li>Finish game!</li>
+        </ol>
+        <p>Some other text...</p>
+        </div>
+        <div class="modal-footer">
+        <p>Add some text to the footer?</p>
+        </div>
+    </div>
+
+</div>
+
+    <script src="index.js"></script>
+
+</body>
+</html>
