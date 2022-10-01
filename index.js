@@ -11,17 +11,14 @@ const cardsTest = [
 
   //Array of the turn modifiers
 const modifiers = [
+    "Draw 1",
     "Draw 2",
     "Draw 3",
-    "Draw 4",
     "Pass 1 to the Left",
     "Pass 2 to the Left",
     "Pass 1 to the Right",
     "Pass 2 to the Right",
     "Reverse Play Order",
-    "Eights are Wild",
-    "Face Cards are Wild",
-    "Goal Modifier"
   ];
 
 function deckBuilder() {
