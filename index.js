@@ -1,20 +1,15 @@
-//Array of the goals
-const goals = [
-    "Two of a Kind",
-    "Two Pairs",
-    "Three Pairs",
-    "Three of a Kind (Set)",
-    "Two Three of a Kinds (Two Sets)",
-    "Three in a Row (Run)",
-    "Two Three in a Rows (Two Sets)",
-    "Three of a Suit",
-    "Four of a Suit",
-    "Two of a Kind + Two of a Suit",
-    "Two of a Kind + Three in a Row (Run)",
+//Array of cards
+const cardsTest = [
+    "Two of Hearts",
+    "Two of Spades",
+    "Three of Diamonds",
+    "Four of Clubs",
+    "King of Spades",
+    "King of Clubs",
 
   ];
 
-  //Array of the goals
+  //Array of the turn modifiers
 const modifiers = [
     "Draw 2",
     "Draw 3",
@@ -29,6 +24,40 @@ const modifiers = [
     "Goal Modifier"
   ];
 
+function deckBuilder() {
+    const values = [ "A", "2", "3", "4", "5", "6", "7", "8", "9", "10", "J", "Q", "K", ];
+    const suits = ["Hearts", "Diamonds", "Spades", "Clubs"];
+
+    const cards = [];
+    for (let s = 0; s < suits.length; s++) {
+        for (let v = 0; v < values.length; v++) {
+            const value = values[v];
+            const suit = suits[s];
+            cards.push({ value, suit });
+  }
+}
+return cards;
+}
+
+/*function randomCard(cards) { 
+    const random = Math.floor(Math.random() * 51);  
+    const cardValue = cards[random].value;
+    const cardSuit = cards[random].suit;
+
+    let entity;
+    cardSuit === "Diamonds" ? (entity = "&diams;") : (entity = "&" + cardSuit.toLowerCase() + ";");
+
+    const card = document.createElement("div");
+    card.classList.add("card", cardSuit.toLowerCase());
+    card.innerHTML = 
+    '<span class="card-value-suit top">' + cardValue + entity + '</span>' + 
+    '<span class="card-suit">' + entity + '</span>' + 
+    '<span class="card-value-suit bot">' + cardValue + entity + '</span>';
+    document.body.appendChild(card);
+  }
+  const cards = deckBuilder();
+  randomCard(cards);
+*/
 let players = [];
 
 class Player {
@@ -42,8 +71,12 @@ class Player {
 //HTML Elements that need to be updated by JS
 const startButton = document.querySelector(".startButton");
 const nextButton = document.querySelector(".nextButton"); 
-const roundGoalDiv = document.querySelector(".roundGoalDiv");
-const roundGoal = document.querySelector(".roundGoal");
+const turnCards = document.querySelector(".turnCards");
+const turn1 = document.querySelector(".turn1");
+const turn2 = document.querySelector(".turn2");
+const turn3 = document.querySelector(".turn3");
+const turn4 = document.querySelector(".turn4");
+const turn5 = document.querySelector(".turn5");
 const turnDiv = document.querySelector(".turnDiv");
 const turnCounter = document.querySelector(".turnCounter");
 const turnModifier = document.querySelector(".turnModifier");
@@ -52,30 +85,33 @@ const newPlayerButton = document.querySelector(".newPlayerButton");
 const newPlayerDiv = document.querySelector(".newPlayerDiv");
 const playersDisplay = document.querySelector(".players");
 const finishButton = document.querySelector(".finishButton");
-const numOfTurnsDiv = document.querySelector(".numOfTurnsDiv");
-const turnsButton3 = document.querySelector(".turnsButton3");
-const turnsButton5 = document.querySelector(".turnsButton5");
-const turnsButton7 = document.querySelector(".turnsButton7");
+const numOfRoundsDiv = document.querySelector(".numOfRoundsDiv");
+const roundsButton3 = document.querySelector(".roundsButton3");
+const roundsButton5 = document.querySelector(".roundsButton5");
+const roundsButton7 = document.querySelector(".roundsButton7");
 const finishRoundDiv = document.querySelector(".finishRoundDiv");
 const newPlayerInput = document.getElementById("newPlayer");
 const finishButtonDiv = document.querySelector(".finishButtonDiv");
 const addPlayerDiv = document.querySelector(".addPlayerDiv");
 const addPlayerButton = document.querySelector(".addPlayerButton");
 const playersScoresDiv = document.querySelector(".playersScoresDiv");
+const rounds = document.querySelector(".rounds");
+const gameOver = document.querySelector(".gameOver");
+const wildCard = document.querySelector(".wildCard");
 
 //Main gameplay buttons
 startButton.addEventListener("click", gameSetup);
-nextButton.addEventListener("click", setModifier);
+nextButton.addEventListener("click", startTurn);
 addPlayerButton.addEventListener("click", playerInput);
 newPlayerButton.addEventListener("click", addPlayer);
 finishButton.addEventListener("click", getNumTurns);
-turnsButton3.addEventListener("click", () => {
+roundsButton3.addEventListener("click", () => {
     startGame(3)
 });
-turnsButton5.addEventListener("click", () => {
+roundsButton5.addEventListener("click", () => {
     startGame(5) 
 });
-turnsButton7.addEventListener("click", () => {
+roundsButton7.addEventListener("click", () => {
     startGame(7)
 });
 
@@ -96,7 +132,7 @@ function addPlayer() {
     players.push(newPlayer);
     document.getElementById("newPlayer").value = "";
     updateScore();
-     if (players.length > 1){
+     if (players.length > 0){
     finishButtonDiv.style.display = "block";
     }
     addPlayerDiv.style.display = "block";
@@ -107,41 +143,79 @@ function getNumTurns() {
     newPlayerDiv.style.display = "none";
     addPlayerDiv.style.display = "none";
     finishButtonDiv.style.display = "none";
-    numOfTurnsDiv.style.display = "block";
+    numOfRoundsDiv.style.display = "block";
 }
 
-function startGame(turns) {
-    totalTurns = turns;
-    numOfTurnsDiv.style.display = "none";
-    setGoal();
+function startGame(roundsChosen) {
+    totalRounds = roundsChosen;
+    numOfRoundsDiv.style.display = "none";
+    startTurn();
 }
 
-let currentGoal;
+let currentValue;
+let currentSuit;
+let wildCardsThisRound = [];
 let currentModifier;
 let currentTurn = 0;
-let totalTurns;
+let totalTurns = 5;
+let totalRounds;
+let currentRound = 1;
 
-function setGoal() {
+function startTurn() {
+    if(currentRound > totalRounds) {
+        finishRoundDiv.style.display = "none";
+        gameOver.style.display = "block";
+        gameOver.innerHTML = "Game over!";
+    } else {
+
     finishRoundDiv.style.display = "none";
-    roundGoalDiv.style.display = "block";
+    turnCards.style.display = "flex";
     turnDiv.style.display = "block";
+    wildCard.style.display = "block";
     nextButtonDiv.style.display = "block";
     nextButton.innerHTML = "Next Turn";
-    //reset turn when goal changes
-    currentTurn = 0;
-    //get a random goal from the goals array but not the same one back to back
-    let newGoal = goals[Math.floor(Math.random()*goals.length)];
-    if (newGoal != currentGoal) {
-        currentGoal = newGoal;
-        roundGoal.innerHTML = currentGoal;
+    rounds.style.display = "inline";
+    rounds.innerHTML = currentRound + "/" + totalRounds;
+
+    //get a random wild card from the cards array but not the same one back to back
+    const cards = deckBuilder();
+
+    const random = Math.floor(Math.random() * 51);  
+    const cardValue = cards[random].value;
+    const cardSuit = cards[random].suit;
+
+    if (!wildCardsThisRound.includes(cardValue+cardSuit)) {
+        currentValue = cardValue;
+        currentSuit = cardSuit;
+        wildCardsThisRound.push(currentValue+currentSuit);
+        wildCard.classList.add("hearts");
+        switch(currentSuit) {
+            case "Hearts":
+                suitIcon = "&hearts;"
+                wildCard.className = "hearts";
+              break;
+            case "Diamonds":
+                suitIcon = "&diams;"
+                wildCard.className = "diamonds";
+              break;
+            case "Spades":
+                suitIcon = "&spades;";
+                wildCard.className = "spades";
+              break;
+            case "Clubs":
+                suitIcon = "&clubs;";
+                wildCard.className = "clubs";
+          }
+        wildCard.innerHTML = currentValue + suitIcon;
         setModifier();
     } else {
-        setGoal();
+        startTurn();
+    }
     }
 }
 
 function setModifier() {
-    //turn counter checking when to change goal
+    //turn counter checking when to change round
     if (currentTurn < totalTurns) {
         //get a random modifier from the modifiers array but not the same one back to back
         let newModifier = modifiers[Math.floor(Math.random()*modifiers.length)];
@@ -150,6 +224,24 @@ function setModifier() {
         turnModifier.innerHTML = currentModifier;
         currentTurn++;
         turnCounter.innerHTML = "Turn " + currentTurn + " of " + totalTurns;
+
+        switch(currentTurn) {
+            case 1:
+                turn1.innerHTML = currentTurn;
+              break;
+            case 2:
+                turn2.innerHTML = currentTurn;
+              break;
+            case 3:
+                turn3.innerHTML = currentTurn;
+              break;
+            case 4:
+                turn4.innerHTML = currentTurn;
+              break;
+            case 5:
+                turn5.innerHTML = currentTurn;
+          }
+
         }   else {
         setModifier();
         }
@@ -157,14 +249,16 @@ function setModifier() {
             nextButton.innerHTML = "Finish Round";
         }
     } else {
+        //need a way to stop the code from running another turn when the round is finished. it isnt noticeable unless logging console but could cause issues?
         finishRound();
+        wildCardsThisRound = [];
     }
 }
 
 function finishRound() {
 
     finishRoundDiv.style.display = "block";
-    roundGoalDiv.style.display = "none";
+    turnCards.style.display = "none";
     turnDiv.style.display = "none";
     nextButtonDiv.style.display = "none";
 
@@ -181,11 +275,6 @@ function finishRound() {
         });
         finishRoundDiv.appendChild(btn);
     }
-
-    let btn = document.createElement("button");
-        btn.innerHTML = "No one";
-        btn.addEventListener("click", setGoal);
-        finishRoundDiv.appendChild(btn);
 }
 
 function addScore(winner) {
@@ -197,7 +286,13 @@ function addScore(winner) {
             updateScore();
         }
     });
-    setGoal();
+    currentRound ++;
+    currentTurn = 0;
+    turn2.innerHTML = "";
+    turn3.innerHTML = "";
+    turn4.innerHTML = "";
+    turn5.innerHTML = "";
+    startTurn();
 }
 
 function updateScore() {
