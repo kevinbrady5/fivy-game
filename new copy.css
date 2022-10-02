@@ -1,0 +1,140 @@
+.header {
+    background-color: #666;
+    width: 100%;
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 8vh;
+    text-align: center;
+}
+
+.header h1 {
+  display: inline-block;
+}
+
+.scoreButton {
+  position: fixed;
+  left: 2vh;
+  top: 2vh
+}
+
+.helpButton {
+  position: fixed;
+  right: 2vh;
+  top: 2vh;
+}
+
+.mainContent {
+    background-color: #999;
+    width: 100%;
+    position: fixed;
+    top: 8vh;
+    left: 0;
+    height: 86vh;
+    text-align: center;
+}
+
+  .turnCards {
+    display: block;
+    color:rgb(60, 60, 60);
+    background-color:coral;
+    align-self: center;
+    text-align: center;
+   }
+ 
+  .turnCards div {
+   border: 2px solid white;
+   background-color: #666;
+   border-radius:4px;
+   display: inline-block;
+   height: 12vh;
+   width: 8.57vh;
+   color: white;
+   vertical-align: middle;
+  }
+
+  .turnDiv {
+    display: block;
+    text-align: center;
+    background-color: aquamarine;
+  }
+
+.footer {
+    background-color: #333;
+    width: 100%;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    height: 6vh;
+}
+
+ /* The Modal (background) */
+ .modal {
+  display: none; /* Hidden by default */
+  position: fixed; /* Stay in place */
+  z-index: 1; /* Sit on top */
+  left: 0;
+  top: 0;
+  width: 100%; /* Full width */
+  height: 100%; /* Full height */
+  overflow: auto; /* Enable scroll if needed */
+  background-color: rgb(0,0,0); /* Fallback color */
+  background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+}
+
+/* The Close Button */
+.close, .closeScore {
+  color: #aaa;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+}
+
+.close:hover, .closeScore:hover,
+ .close:focus, .closeScore:focus {
+  color: black;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+/* Modal Header */
+.modal-header {
+  padding: 2px 16px;
+  background-color: white;
+  color: #41badb;
+  font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+}
+
+/* Modal Body */
+.modal-body {padding: 2px 16px;
+  font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+}
+
+.modal-body li {
+  text-align: left;
+}
+
+/* Modal Footer */
+.modal-footer {
+  padding: 2px 16px;
+  background-color: white;
+  color: #41badb;
+  font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+}
+
+/* Modal Content */
+.modal-content {
+  position: relative;
+  background-color: #fefefe;
+  margin: auto;
+  padding: 0;
+  border: 1px solid #888;
+  width: 80%;
+  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2),0 6px 20px 0 rgba(0,0,0,0.19);
+  animation-name: animatetop;
+  animation-duration: 0.4s
+}
+
+.modal-content i {
+ color: #41badb;
+}
