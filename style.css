@@ -337,6 +337,12 @@ body {
     line-height: 1;
 }
 
+@media (max-height: 500px) {
+  .footer {
+    line-height: .25;
+  }
+}
+
  /* The Modal (background) */
  .modal {
   display: none; /* Hidden by default */
