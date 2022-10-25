@@ -1,0 +1,478 @@
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
+
+/* Custom Properties, update these? */
+
+:root {
+    --ff-primary: 'Source Sans Pro', sans-serif;
+    --ff-secondary: 'Source Code Pro', monospace;
+
+    --fw-reg: 300;
+    --fw-bold: 900;
+
+    --clr-light: #ffffff;
+    --clr-dark: #474747;
+    --clr-accent: #85dda7;
+
+    --fs-h1: 3rem;
+    --fs-h2: 2.25rem;
+    --fs-h3: 1.25rem;
+    --fs-body: 1rem;
+
+    --bs: .25em .25em .75em rgba(0, 0, 0, .25),
+        .125em .125em .25em rgba(0, 0, 0, .15);
+}
+
+@media (min-width: 900px) {
+  :root {
+      --fs-h1: 4.5rem;
+      --fs-h2: 3.75rem;
+      --fs-h3: 1.5rem;
+      --fs-body: 1.125rem;
+  }
+}
+
+/* Typography */
+
+h1,
+h2,
+h3 {
+    line-height: 1;
+    margin: 0;
+}
+
+h1 {font-size: var(--fs-h1);}
+h2 {font-size: var(--fs-h2);}
+h3 {font-size: var(--fs-h3);}
+
+/* Buttons */
+
+.btn {
+  display: inline-block;
+  background: var(--clr-light);
+  color: var(--clr-accent);
+  text-decoration: none;
+  border: solid 2px;
+  border-radius: 5px;
+  border-color: var(--clr-accent);
+  cursor: pointer;
+  font-size: .8rem;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  font-weight: var(--fw-bold);
+  transition: transform 200ms ease-in-out;
+}
+
+@media (hover: hover) {
+  button:hover {
+    transform: scale(1.05);
+     background-color: var(--clr-accent);
+     color: var(--clr-light);
+   }
+}
+
+/* General style */
+
+body {
+  background: var(--clr-light);
+  color: var(--clr-dark);
+  margin: 0;
+  font-family: var(--ff-primary);
+  font-size: var(--fs-body);
+  line-height: 1.6;
+  overflow: hidden; /* Hide scrollbars */
+}
+
+
+.header {
+    background-color: var(--clr-light);
+    color: var(--clr-accent);
+    width: 100%;
+    position: relative;
+    padding-bottom: 2em;
+    text-align: center;
+    z-index: 3;
+}
+
+.header h1 {
+  display: inline-block;
+}
+
+.logo {
+  float: left;
+  border: solid 2px var(--clr-accent);
+  border-radius: 5px;
+  margin-left: .25em;
+  margin-top: .25em;
+  font-weight: var(--fw-reg);
+  font-size: var(--fs-h2);
+  padding: .1em;
+}
+
+.logoTitle {
+  float: left;
+  margin-top: .25em;
+}
+
+.scoreButton {
+  float: right;
+  margin-top: 1em;
+  padding: 1em 1em;
+}
+
+.helpButton {
+  float: right;
+  margin: 1em;
+  padding: 1em 1em;
+}
+
+@media (min-width: 900px) {
+  .logoTitle {
+    margin-top: .3em;
+}
+.helpButton, .scoreButton {
+  margin-top: 1.5em;
+  font-size: 1em;
+}
+}
+
+.mainContent {
+    background-color: var(--clr-light);
+    width: 100%;
+    position: relative;
+    padding-top: 7em;
+    text-align: center;
+    z-index: 1;
+}
+
+.startMessage {
+  color: var(--clr-accent);
+  padding-bottom: .5em;
+}
+
+@media (max-height: 500px) {
+  .mainContent {
+    padding-top: 3.5em;
+  }
+}
+
+.startButton {
+  padding: .5em;
+  margin-top: 1.5em;
+  font-size: var(--fs-h3);
+}
+
+.addPlayerDiv {
+  display: none;
+}
+
+.newPlayerDiv {
+  display: none;
+}
+
+.newPlayerButton {
+  padding: .5em;
+}
+
+.getRoundsDiv {
+  display: none;
+}
+
+.finishButtonDiv {
+  display: none;
+  padding-top: 2em;
+}
+
+.roundBtn {
+  padding: .75em;
+  font-size: var(--fs-h3);
+  margin: .25em;
+}
+
+.addPlayerButton {
+  padding: .25em;
+  font-size: var(--fs-h3);
+}
+
+.finishButton {
+  padding: .5em;
+}
+
+.nextButton {
+  padding: .5em;
+  font-size: var(--fs-h3);
+}
+
+.turnCards {
+  display: block;
+  color:var(--clr-dark);
+  background-color:var(--clr-light);
+  align-self: center;
+  text-align: center;
+  }
+
+.turnCards div {
+  border: 4px solid var(--clr-accent);
+  background-color: var(--clr-accent);
+  border-radius:4px;
+  display: inline-block;
+  height: 2em;
+  width: 1.45em;
+  color: var(--clr-light);
+  vertical-align: middle;
+  font-size: var(--fs-h1);
+  font-weight: var(--fw-bold);
+  box-shadow: var(--bs);
+}
+
+@media (max-width: 400px) {
+  .turnCards div {
+    font-size: var(--fs-h2);
+  }
+  .startButton {
+    font-size: var(--fs-body);
+  }
+  .turn1 h1 {
+    font-size: var(--fs-h3);
+  }
+}
+
+@media (max-height: 500px) {
+  .startMessage {
+    color: var(--clr-accent);
+    font-size: var(--fs-h3);
+    padding-bottom: .25em;
+  }
+  .turnCards div {
+    font-size: var(--fs-h2);
+  }
+  .startButton {
+    font-size: var(--fs-body);
+  }
+  .addPlayerButton {
+    padding: .25em;
+    font-size: var(--fs-body);
+  }
+  .finishButtonDiv {
+    display: none;
+    padding-top: 1em;
+  }
+  .finishButton {
+    padding: .25em;
+    font-size: var(--fs-body);
+  }
+  .nextButton {
+    padding: .25em;
+    font-size: var(--fs-body);
+  }
+}
+
+.turn2, .turn3 , .turn4 ,  .turn5 {
+  padding-top: .2em;
+}
+
+.turn1 h1 {
+    border: solid 2px var(--clr-light);
+    border-radius: 5px;
+    margin-left: .25em;
+    margin-top: .65em;
+    padding: .1em;
+    font-weight: var(--fw-reg);
+    font-size: var(--fs-h2);
+  }
+
+  @media (min-width: 900px) {
+    .turn1 h1 {
+      margin-left: .215em;
+      margin-top: .5em;
+  }
+  }
+
+  @media (max-width: 400px) {
+    .turn1 h1 {
+      font-size: .75em;
+      margin-left: .2em;
+    }
+  }
+
+  @media (max-height: 500px) {
+    .turn1 h1 {
+      font-size: .75em;
+      margin-left: .2em;
+    }
+  }
+
+.turnDiv {
+  display: none;
+  text-align: center;
+  background-color: var(--clr-light);
+}
+
+.wildCard {
+  font-size: var(--fs-h3);
+  font-weight: var(--fw-bold);
+  color: var(--clr-dark);
+}
+
+@media (max-height: 500px) {
+  .wildCard {
+    font-size: var(--fs-body);
+  }
+}
+
+.footer {
+    background-color: var(--clr-dark);
+    color: var(--clr-light);
+    text-align: center;
+    width: 100%;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    z-index: 2;
+    padding: 0;
+    line-height: 1;
+}
+
+ /* The Modal (background) */
+ .modal {
+  display: none; /* Hidden by default */
+  position: fixed; /* Stay in place */
+  z-index: 4; /* Sit on top */
+  left: 0;
+  top: 0;
+  width: 100%; /* Full width */
+  height: 100%; /* Full height */
+  overflow: auto; /* Enable scroll if needed */
+  background-color: rgb(0,0,0); /* Fallback color */
+  background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+}
+
+/* The Close Button */
+.close, .closeScore {
+  color: #aaa;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+}
+
+.close:hover, .closeScore:hover,
+ .close:focus, .closeScore:focus {
+  color: black;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+/* Modal Header */
+.modal-header {
+  padding: 2px 16px;
+  background-color: var(--clr-light);
+  color: var(--clr-accent);
+  font-family: var(--ff-primary);
+}
+
+.scoreTitle, .howToPlayTitle {
+  padding-top: .5em;
+  text-align: center;
+}
+
+/* Modal Body */
+.modal-body, .scoreBoard {padding: 2px 16px;
+  font-family: var(--ff-primary);
+  color: var(--clr-dark);
+}
+
+.modal-body li {
+  text-align: left;
+}
+
+/* Modal Footer */
+.modal-footer {
+  padding: 2px 16px;
+  background-color: var(--clr-light);
+  color: var(--clr-accent);
+  font-family: var(--ff-secondary);
+}
+
+/* Modal Content */
+.modal-content {
+  position: relative;
+  background-color: var(--clr-light);
+  margin: auto;
+  padding: 0;
+  width: 80%;
+  box-shadow: var(--bs);
+  animation-name: animatetop;
+  animation-duration: 0.4s
+}
+
+.modal-content i {
+ color: var(--clr-accent);
+ font-weight: var(--fw-bold);
+}
+
+.hithere {
+  animation: 1s hithere 1s ease 1;
+}
+@keyframes hithere {
+  30% { transform: scale(1.2); }
+  40%, 60% { transform: rotate(-20deg) scale(1.2); }
+  50% { transform: rotate(20deg) scale(1.2); }
+  70% { transform: rotate(0deg) scale(1.2); }
+  100% { transform: scale(1); }
+}
+
+.flip {
+	backface-visibility: visible !important;
+	animation: flip 2s ease 1;
+}
+@keyframes flip {
+	0% {
+		transform: perspective(400px) rotateY(0);
+		animation-timing-function: ease-out;
+	}
+	40% {
+		transform: perspective(400px) translateZ(150px) rotateY(170deg);
+		animation-timing-function: ease-out;
+	}
+	50% {
+		transform: perspective(400px) translateZ(150px) rotateY(190deg) scale(1);
+		animation-timing-function: ease-in;
+	}
+	80% {
+		transform: perspective(400px) rotateY(360deg) scale(.95);
+		animation-timing-function: ease-in;
+	}
+	100% {
+		transform: perspective(400px) scale(1);
+		animation-timing-function: ease-in;
+	}
+}
+
+.bounce {
+  animation: 1.5s bounce 2s ease 1,
+  fade-in 4s ease 1;
+}
+@keyframes bounce {
+    70% { transform:translateY(0%); }
+    80% { transform:translateY(-15%); }
+    90% { transform:translateY(0%); }
+    95% { transform:translateY(-7%); }
+    97% { transform:translateY(0%); }
+    99% { transform:translateY(-3%); }
+    100% { transform:translateY(0); }
+}
+
+@keyframes fade-in {
+  0% {
+    opacity: 0;
+  }
+  60% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
