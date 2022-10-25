@@ -193,8 +193,10 @@ body {
 }
 
 .addPlayerButton {
-  padding: .25em;
+  padding-left: .25em;
+  padding-right: .25em;
   font-size: var(--fs-h3);
+  letter-spacing: 0;
 }
 
 .finishButton {
@@ -253,7 +255,6 @@ body {
     font-size: var(--fs-body);
   }
   .addPlayerButton {
-    padding: .25em;
     font-size: var(--fs-body);
   }
   .finishButtonDiv {
@@ -371,6 +372,7 @@ body {
   background-color: var(--clr-light);
   color: var(--clr-accent);
   font-family: var(--ff-primary);
+  margin-top: .5em;
 }
 
 .scoreTitle, .howToPlayTitle {

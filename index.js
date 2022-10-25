@@ -79,7 +79,10 @@ function playerInput() {
 }
 
 function savePlayer() {
-  let newPlayer = new Player(document.getElementById("newPlayer").value, 0, 0);
+  let playerNameInput = document.getElementById("newPlayer").value;
+
+  if(playerNameInput != "" && !players.some(player => player.name === playerNameInput)){
+  let newPlayer = new Player(playerNameInput, 0, 0);
   players.push(newPlayer);
   document.getElementById("newPlayer").value = "";
   //add confirmation message that player was added successfully
@@ -89,6 +92,11 @@ function savePlayer() {
   }
   addPlayerDiv.style.display = "block";
   newPlayerDiv.style.display = "none";
+} else if(playerNameInput!= "") {
+  alert("There is already a player with this name.");
+} else {
+  alert("Player name can not be blank.");
+}
 }
 
 function getTotalRounds() {
@@ -297,7 +305,7 @@ scoreBtn.onclick = function() {
     scoreModal.style.display = "block";
     scoreBoard.innerHTML = "";
     if(currentRound == 0) {
-      scoreBoard.innerHTML += "Game not started yet<br>";
+      scoreBoard.innerHTML += "Game has not started yet<br>";
     } else {
     scoreBoard.innerHTML += "Round: " + currentRound + " of " + totalRounds + "<br>";
     }
