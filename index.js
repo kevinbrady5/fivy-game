@@ -198,13 +198,14 @@ function nextTurn() {
 }
 
 function getWildCard() {
-  wildCard.classList.add("bounce");
+  
     //turn counter checking when to change round
     if (currentTurn <= totalTurns) {
       //get a random wild card from the wildCards array but no repeats during round
       let newWildCard = wildCards[Math.floor(Math.random()*wildCards.length)];
       if (!wildCardsThisRound.includes(newWildCard)){
       wildCardsThisRound.push(newWildCard);
+      wildCard.classList.add("bounce");
       wildCard.innerHTML = newWildCard + "s are wild this turn!";
       }   else {
       getWildCard();
