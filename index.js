@@ -329,20 +329,30 @@ function gameOverDisplay() {
   let thirdPlace = players[2];
   let thirdPlaceIcon = '<i class="fa-solid fa-trophy checkBox"></i> 3rd - ';
 
+
+  if(players.length == 2){
+    //tie between 1st and 2nd
+    if(firstPlace.score == secondPlace.score ) {
+      secondPlaceIcon = firstPlaceIcon;
+    }
+  }
   //if 3 way tie for first, change icons to match
+  if(players.length >= 3){
   if(firstPlace.score == secondPlace.score && firstPlace.score == thirdPlace.score) {
     secondPlaceIcon = firstPlaceIcon;
     thirdPlaceIcon = firstPlaceIcon;
-  } 
+  }
+
   //tie between 1st and 2nd
   if(firstPlace.score == secondPlace.score && firstPlace.score != thirdPlace.score) {
     secondPlaceIcon = firstPlaceIcon;
   }
-
+  
   //tie between 2nd and third
   if(firstPlace.score != secondPlace.score && secondPlace.score == thirdPlace.score) {
     thirdPlaceIcon = secondPlaceIcon;
   }
+}
 
   finalScoreDisplay.innerHTML += firstPlaceIcon + firstPlace.name + " " + firstPlace.score + "<br>";
   if(players.length > 1) {
