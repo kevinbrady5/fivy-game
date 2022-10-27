@@ -36,6 +36,8 @@ const finishButtonDiv = document.querySelector(".finishButtonDiv");
 const finishButton = document.querySelector(".finishButton");
 const newPlayerInput = document.getElementById("newPlayer");
 const getRoundsDiv = document.querySelector(".getRoundsDiv");
+const preGameDisplay = document.querySelector(".preGameDisplay");
+const preGameButton = document.querySelector(".preGameButton");
 const nextButton = document.querySelector(".nextButton");
 const wildCard = document.querySelector(".wildCard");
 const turnCounter = document.querySelector(".turnCounter");
@@ -48,13 +50,18 @@ const turn4 = document.querySelector(".turn4");
 const turn5 = document.querySelector(".turn5");
 const scoreBoard = document.querySelector(".scoreBoard");
 const addScore = document.querySelector(".addScore");
-const gameOver = document.querySelector(".gameOver");
+const finishScore = document.querySelector(".finishScore");
+const finishScoreButton = document.querySelector(".finishScoreButton");
+const finalScoreDisplay = document.querySelector(".finalScoreDisplay");
+
 
 startButton.addEventListener("click", gameSetup);
 addPlayerButton.addEventListener("click", playerInput);
 newPlayerButton.addEventListener("click", savePlayer);
 nextButton.addEventListener("click", nextTurn);
-finishButton.addEventListener("click", getTotalRounds)
+finishButton.addEventListener("click", getTotalRounds);
+preGameButton.addEventListener("click", startRound);
+finishScoreButton.addEventListener("click", showPreGameDisplay);
 
 let wildCardsThisRound = [];
 let currentTurn = 0;
@@ -133,7 +140,23 @@ function getTotalRounds() {
 
 function saveRoundSelection(rounds) {
   totalRounds = rounds;
-  startRound();
+  showPreGameDisplay();
+}
+
+function showPreGameDisplay() {
+  if(currentRound == totalRounds){
+    gameOverDisplay();
+  } else {
+    currentRound += 1;
+
+    startMessage.innerHTML = "New Round Setup"
+    getRoundsDiv.style.display = "none";
+    addScore.style.display = "none";
+    finishScore.style.display = "none";
+    preGameDisplay.style.display = "block";
+
+    preGameButton.innerHTML = "Start Round " + currentRound;
+}
 }
 
 function resetTurnCards() {
@@ -151,24 +174,17 @@ function resetTurnCards() {
 
 function startRound() {
   resetTurnCards();
-
-  if(currentRound == totalRounds){
-    startMessage.innerHTML = "Game Over!"
-    addScore.style.display = "none";
-  } else {
-  startButton.style.display = "none";
-  getRoundsDiv.style.display = "none";
-  addScore.style.display = "none";
+  
+  preGameDisplay.style.display = "none";
   turnCards.style.display = "block";
   turnDiv.style.display = "block";
   nextButton.style.display = "inline-block";
   nextButton.innerHTML = "Next Turn";
 
-  currentRound += 1;
   currentTurn = 1;
   startMessage.innerHTML = "Turn " + currentTurn + " of " + totalTurns;
   getWildCard();
-}
+
 }
 
 function nextTurn() {
@@ -189,7 +205,7 @@ function getWildCard() {
       let newWildCard = wildCards[Math.floor(Math.random()*wildCards.length)];
       if (!wildCardsThisRound.includes(newWildCard)){
       wildCardsThisRound.push(newWildCard);
-      wildCard.innerHTML = newWildCard + "s are wild this round!";
+      wildCard.innerHTML = newWildCard + "s are wild this turn!";
       }   else {
       getWildCard();
       }
@@ -235,17 +251,24 @@ function finishRound() {
 function askForScore() {
   addScore.innerHTML = "";
   addScore.style.display = "block";
+  finishScore.style.display = "none";
   startMessage.innerHTML = "How Many Cards Left?";
 
   players.forEach(player => {
     player.roundScore = 0;
-    addScore.innerHTML += player.name;
+    let scoreName = document.createElement("p");
+    scoreName.id = player.name + "scoreName";
+    scoreName.style.display = "inline";
+    scoreName.style.margin = ".2s5em";
+    scoreName.innerHTML = player.name;
+    addScore.appendChild(scoreName);
     let scoreInput = document.createElement("input");
     scoreInput.id = player.name + "scoreInput";
     scoreInput.type = "number";
     scoreInput.defaultValue = 0;
     scoreInput.min = 0;
     scoreInput.max = 10;
+    scoreInput.style.margin = ".25em";
     addScore.appendChild(scoreInput);
     addScore.innerHTML += "<br>"
   });
@@ -255,6 +278,7 @@ function askForScore() {
   saveScoreButton.innerHTML = "Save Scores";
   saveScoreButton.id = "saveScoreButton";
   saveScoreButton.style.padding = ".5em";
+  saveScoreButton.style.marginTop = "1em";
   addScore.appendChild(saveScoreButton);
   players.forEach(player => {
     saveScoreButton.addEventListener("click", () => {
@@ -262,22 +286,71 @@ function askForScore() {
   });
   });
 
-  let finishScoreButton = document.createElement("button");
-  finishScoreButton.classList = "btn";
-  finishScoreButton.id = "finishScore";
-  finishScoreButton.innerHTML = "Start Next Round";
-  finishScoreButton.style.padding = ".5em";
-  finishScoreButton.style.display = "none";
-  addScore.appendChild(finishScoreButton);
-  finishScoreButton.addEventListener("click", startRound);
 }
 
 function updateScore(player) {
   player.roundScore = parseInt(document.getElementById(player.name + "scoreInput").value);
   player.score += player.roundScore;
+  startMessage.innerHTML = "Round Score";
   document.getElementById(player.name + "scoreInput").style.display = "none";
+  document.getElementById(player.name + "scoreName").innerHTML = player.name + " - " + player.roundScore;
   document.getElementById("saveScoreButton").style.display = "none";
-  document.getElementById("finishScore").style.display = "inline-block";
+  finishScore.style.display = "block";
+  if(currentRound == totalRounds) {
+    finishScoreButton.innerHTML = "Next: Final Scores";
+  }
+}
+
+function gameOverDisplay() {
+  startMessage.innerHTML = "Game Over!";
+  addScore.style.display = "none";
+  finishScore.style.display = "none";
+  turnCards.style.display = "block";
+  turnDiv.style.display = "block";
+  wildCard.style.display = "none";
+
+  turn1.classList = ("turn1 bounce2-1");
+  turn2.classList.add("bounce2-2");
+  turn3.classList.add("bounce2-3");
+  turn4.classList.add("bounce2-4");
+  turn5.classList.add("bounce2-5");
+
+  players.sort(function(a, b){
+    const score1 = new Date(a.score)
+    const score2 = new Date(b.score)
+    
+    return score1 - score2;
+})
+
+  let firstPlace = players[0];
+  let firstPlaceIcon = '<i class="fa-solid fa-crown checkBox"></i> 1st - ';
+  let secondPlace = players[1];
+  let secondPlaceIcon = '<i class="fa-solid fa-star checkBox"></i> 2nd - ';
+  let thirdPlace = players[2];
+  let thirdPlaceIcon = '<i class="fa-solid fa-trophy checkBox"></i> 3rd - ';
+
+  //if 3 way tie for first, change icons to match
+  if(firstPlace.score == secondPlace.score && firstPlace.score == thirdPlace.score) {
+    secondPlaceIcon = firstPlaceIcon;
+    thirdPlaceIcon = firstPlaceIcon;
+  } 
+  //tie between 1st and 2nd
+  if(firstPlace.score == secondPlace.score && firstPlace.score != thirdPlace.score) {
+    secondPlaceIcon = firstPlaceIcon;
+  }
+
+  //tie between 2nd and third
+  if(firstPlace.score != secondPlace.score && secondPlace.score == thirdPlace.score) {
+    thirdPlaceIcon = secondPlaceIcon;
+  }
+
+  finalScoreDisplay.innerHTML += firstPlaceIcon + firstPlace.name + " " + firstPlace.score + "<br>";
+  if(players.length > 1) {
+  finalScoreDisplay.innerHTML += secondPlaceIcon + secondPlace.name + " " + secondPlace.score + "<br>";
+  }
+  if(players.length > 2){
+  finalScoreDisplay.innerHTML += thirdPlaceIcon + thirdPlace.name + " " + thirdPlace.score;
+  }
 }
 
 //Score and Instructions Modals
