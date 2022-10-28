@@ -21,6 +21,7 @@
     --fs-h2: 2.25rem;
     --fs-h3: 1.25rem;
     --fs-body: 1rem;
+    --fs-cards: 2.75rem;
 
     --bs: .25em .25em .75em rgba(0, 0, 0, .25),
         .125em .125em .25em rgba(0, 0, 0, .15);
@@ -32,6 +33,7 @@
       --fs-h2: 3.75rem;
       --fs-h3: 1.5rem;
       --fs-body: 1.125rem;
+      --fs-cards: 4.25rem;
   }
 }
 
@@ -153,15 +155,15 @@ body {
   padding-bottom: .5em;
 }
 
-@media (max-height: 500px) {
+@media (max-height: 600px) {
   .mainContent {
-    padding-top: 3.5em;
+    padding-top: 2.5em;
   }
 }
 
 .startButton {
   padding: .5em;
-  margin-top: 1.5em;
+  margin-top: 2.5em;
   font-size: var(--fs-h3);
 }
 
@@ -211,6 +213,8 @@ body {
   display: inline-block;
   font-size: var(--fs-h3);
   text-align: left;
+  padding-left: 1em;
+  padding-right: 1em;
 }
 
 .preGameButton {
@@ -251,7 +255,7 @@ body {
 
 @media (max-width: 400px) {
   .turnCards div {
-    font-size: var(--fs-h2);
+    font-size: var(--fs-cards);
   }
   .startButton {
     font-size: var(--fs-body);
@@ -261,14 +265,10 @@ body {
   }
 }
 
-@media (max-height: 500px) {
+@media (max-height: 600px) {
   .startMessage {
-    color: var(--clr-accent);
-    font-size: var(--fs-h3);
-    padding-bottom: .25em;
-  }
-  .turnCards div {
-    font-size: var(--fs-h2);
+    padding-top: .5em;
+    padding-bottom: 0;
   }
   .startButton {
     font-size: var(--fs-body);
@@ -320,7 +320,7 @@ body {
     }
   }
 
-  @media (max-height: 500px) {
+  @media (max-height: 600px) {
     .turn1 h1 {
       font-size: .75em;
       margin-left: .2em;
@@ -334,14 +334,15 @@ body {
 }
 
 .wildCard {
-  font-size: var(--fs-h3);
+  font-size: var(--fs-h2);
   font-weight: var(--fw-bold);
   color: var(--clr-dark);
 }
 
-@media (max-height: 500px) {
+@media (max-height: 600px) {
   .wildCard {
-    font-size: var(--fs-body);
+    margin-top: .5em;
+    margin-bottom: .25em;
   }
 }
 
@@ -362,25 +363,6 @@ body {
 .finalScoreDisplay {
   margin-top: 1em;
   font-size: var(--fs-h3);
-}
-
-.footer {
-    background-color: var(--clr-dark);
-    color: var(--clr-light);
-    text-align: center;
-    width: 100%;
-    position: fixed;
-    bottom: 0;
-    left: 0;
-    z-index: 2;
-    padding: 0;
-    line-height: 1;
-}
-
-@media (max-height: 500px) {
-  .footer {
-    line-height: .25;
-  }
 }
 
  /* The Modal (background) */
@@ -500,7 +482,7 @@ body {
 }
 
 .bounce {
-  animation: 1.5s bounce 2s ease 1,
+  animation: 1.5s bounce 2s ease infinite,
   fade-in 4s ease 1;
 }
 @keyframes bounce {
@@ -526,7 +508,7 @@ body {
 }
 
 .gelatine {
-  animation: gelatine 0.5s 3;
+  animation: gelatine 0.5s infinite;
 }
 @keyframes gelatine {
   from, to { transform: scale(1, 1); }
@@ -536,7 +518,7 @@ body {
 }
 
 .bounce2-1 {
-  animation: bounce2 1.5s ease 1;
+  animation: bounce2 1.5s ease 3;
   animation-delay: .25s;
 }
 @keyframes bounce2 {
@@ -546,22 +528,22 @@ body {
 }
 
 .bounce2-2 {
-  animation: bounce2 1.5s ease 1;
+  animation: bounce2 1.5s ease 3;
   animation-delay: .5s;
 }
 
 .bounce2-3 {
-  animation: bounce2 1.5s ease 1;
+  animation: bounce2 1.5s ease 3;
   animation-delay: .75s;
 }
 
 .bounce2-4 {
-  animation: bounce2 1.5s ease 1;
+  animation: bounce2 1.5s ease 3;
   animation-delay: 1s;
 }
 
 .bounce2-5{
-  animation: bounce2 1.5s ease 1;
+  animation: bounce2 1.5s ease 3;
   animation-delay: 1.25s;
 }
 

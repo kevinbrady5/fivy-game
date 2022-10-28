@@ -58,12 +58,16 @@
             <p>
                 <i class="fa-regular fa-square-check checkBox"></i>
                 Shuffle the deck <br>
+
+                <i class="fa-regular fa-square-check checkBox"></i> Deal 5 cards to each player <br>
+
                 <i class="fa-regular fa-square-check checkBox"></i> 
                 Place 5 "turn cards" face down in a line <br>
-                <i class="fa-regular fa-square-check checkBox"></i> Deal 5 cards to each player <br>
+
+                <i class="fa-regular fa-square-check checkBox"></i> Remaining cards create draw pile <br>
             
                 <i class="fa-solid fa-circle-exclamation checkBox"></i> 
-                Draw 1 card at the start of your turn
+                Draw 1 card to start your turn
             </p>
         </div>
         <div class="preGameDisplayButton">
@@ -97,11 +101,7 @@
             
         </div>
     </div>
-
-    <div class="footer">
-        <p>Add some text to footer?</p>
-    </div>
-
+    
            <!-- Scoreboard Modal -->
     <div id="scoreModal" class="modal">
 
@@ -132,8 +132,9 @@
 <p>The goal of Fivy is to get rid of all your cards before the end of each round and have the lowest score after the final round.</p>
 <ul>
     <li>Fivy is played in <i>rounds</i> and each round has <i>5 turns</i></li>
-    <li>The game starts with 5 face down cards lined up in the middle of the table, these are the <i>turn cards</i></li>
-    <li>Each player is dealt 5 cards and the remaining cards create a face down <i>draw pile</i></li>
+    <li>Each player is dealt 5 cards</li>
+    <li>Then 5 face down cards are placed in a line in the middle of the table, these are the <i>turn cards</i></li>
+    <li>The remaining cards create a face down <i>draw pile</i></li>
     <li>At the start of each turn, the corresponding turn card is turned face up</li>
     <li>You get rid of your cards by playing them when it is your turn</li>
     <li>You play cards by adding them on to the face up <i>turn cards</i>
@@ -159,8 +160,8 @@
 </ol>
 <p>Some other special rules to note...</p>
 <ul>
-    <li>During a player's turn, if there is only one face up turn card in a pile, they can play it on another face up turn card where applicable. This creates a free space to play any card the player chooses</li>
-    <li>Even if a player gets rid of all their cards before the end of the round, play will continue allowing the other players the remaining turns to try to get rid of their cards</li>
+    <li>During a player's turn, if there is only one face up turn card in a pile (meaning no cards have been played on it yet), they can play it on another face up turn card where applicable. This creates a free space to play any card the player chooses</li>
+    <li>Even if a player gets rid of all their cards, they will still draw 1 card when it is their next turn</li>
 </ul>
 </div>
 <div class="modal-footer">

@@ -206,7 +206,7 @@ function getWildCard() {
       if (!wildCardsThisRound.includes(newWildCard)){
       wildCardsThisRound.push(newWildCard);
       wildCard.classList.add("bounce");
-      wildCard.innerHTML = newWildCard + "s are wild this turn!";
+      wildCard.innerHTML = newWildCard + "s are wild!";
       }   else {
       getWildCard();
       }
