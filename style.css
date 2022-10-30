@@ -217,6 +217,11 @@ body {
   padding-right: 1em;
 }
 
+.preGameDisplayText i {
+  color: var(--clr-accent);
+  font-weight: var(--fw-bold);
+ }
+
 .preGameButton {
   padding: .5em;
 }
@@ -411,7 +416,12 @@ body {
 /* Modal Body */
 .modal-body, .scoreBoard {padding: 2px 16px;
   font-family: var(--ff-primary);
+  font-size: var(--fs-h3);
   color: var(--clr-dark);
+}
+
+.scoreBoard {
+  margin-top: .5em;
 }
 
 .modal-body li {
@@ -424,6 +434,7 @@ body {
   background-color: var(--clr-light);
   color: var(--clr-accent);
   font-family: var(--ff-secondary);
+  text-align: center;
 }
 
 /* Modal Content */
@@ -546,4 +557,3 @@ body {
   animation: bounce2 1.5s ease 3;
   animation-delay: 1.25s;
 }
-
