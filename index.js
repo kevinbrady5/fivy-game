@@ -188,7 +188,7 @@ function startRound() {
 }
 
 function nextTurn() {
-  if (confirm("Select OK if all players have completed turn " + currentTurn + ":") == true){
+  if (confirm("Confirm that all players have completed turn " + currentTurn + ".") == true){
     currentTurn += 1;
     startMessage.innerHTML = "Turn " + currentTurn + " of " + totalTurns;
   
