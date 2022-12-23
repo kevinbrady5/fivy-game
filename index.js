@@ -188,13 +188,15 @@ function startRound() {
 }
 
 function nextTurn() {
-  currentTurn += 1;
-  startMessage.innerHTML = "Turn " + currentTurn + " of " + totalTurns;
-
-  wildCard.classList.remove("bounce");
-  void wildCard.offsetWidth;
-
-  getWildCard();
+  if (confirm("Select OK if all players have completed turn " + currentTurn + ":") == true){
+    currentTurn += 1;
+    startMessage.innerHTML = "Turn " + currentTurn + " of " + totalTurns;
+  
+    wildCard.classList.remove("bounce");
+    void wildCard.offsetWidth;
+  
+    getWildCard();
+  }
 }
 
 function getWildCard() {
